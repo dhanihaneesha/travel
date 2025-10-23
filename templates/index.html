@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Travel Destination Explorer</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <header>
+    <h1>Travel Destination Explorer</h1>
+    <nav>
+      <a href="{{ url_for('index') }}">Home</a> | <a href="{{ url_for('about') }}">About</a>
+    </nav>
+  </header>
+
+  <section class="search">
+    <form method="get" action="{{ url_for('index') }}">
+      <input type="text" name="q" placeholder="Search by city or country" value="{{ query }}">
+      <button type="submit">Search</button>
+    </form>
+  </section>
+
+  <section class="list">
+    {% if destinations %}
+      <ul>
+      {% for d in destinations %}
+        <li>
+          <h2>{{ d.name }} <small>({{ d.country }})</small></h2>
+          <p>{{ d.summary }}</p>
+          <p>Rating: {{ d.rating }}</p>
+        </li>
+      {% endfor %}
+      </ul>
+    {% else %}
+      <p>No destinations found.</p>
+    {% endif %}
+  </section>
+
+  <footer>Built for CI/CD case study</footer>
+</body>
+</html>

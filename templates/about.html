@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>About - Travel Destination Explorer</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <header>
+    <h1>About Travel Destination Explorer</h1>
+    <nav>
+      <a href="{{ url_for('index') }}">Home</a> | <a href="{{ url_for('about') }}">About</a>
+    </nav>
+  </header>
+
+  <section>
+    <p>This simple Flask app lists a few travel destinations and demonstrates CI/CD automation using Jenkins, Docker and Kubernetes.</p>
+    <p>Author: Your Name</p>
+  </section>
+
+  <footer><a href="{{ url_for('index') }}">Back</a></footer>
+</body>
+</html>
