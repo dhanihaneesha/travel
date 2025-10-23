@@ -5,7 +5,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 echo "Building Docker Image..."
-                bat "docker build -t journal-app:v1 ."
+                bat "docker build -t travel-app:v1 ."
             }
         }
 
@@ -22,12 +22,13 @@ pipeline {
         stage('Push Docker Image to Dockerhub') {
             steps {
                 echo "Pushing Docker image to Dockerhub..."
-                bat "docker tag journal-app:v1 zzonnaa/journal-app:v1"
-                bat "docker push zzonnaa/journal-app:v1"
+                // Correct tag format: username/repo:tag
+                bat "docker tag travel-app:v1 dhanihaneesha/travel-app:v1"
+                bat "docker push dhanihaneesha/travel-app:v1"
             }
         }
 
-        stage('Deploy/Update Kubernetes') {
+        stage('Deploy to Kubernetes') {
             steps {
                 echo "Deploying to Kubernetes..."
                 bat 'kubectl apply -f deployment.yaml --validate=false'
@@ -37,8 +38,9 @@ pipeline {
         stage('Restart Deployment') {
             steps {
                 echo "Restarting Deployment to pick up new image..."
-                bat "kubectl rollout restart deployment/journal-deployment"
+                bat "kubectl rollout restart deployment/travel-deployment"
             }
         }
     }
 }
+
